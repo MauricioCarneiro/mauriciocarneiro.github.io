@@ -1,0 +1,290 @@
+<html>
+<head>
+   <!-- start of google analytics --!>
+   <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     _uacct = "UA-72381-4";
+     urchinTracker();
+   </script>
+   <!-- end of google analytics --!>
+  <title>Clockgen: Molecular Clock Simulator</title>
+  <style type="text/css"> ul { list-style-type: disc }; </style>
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<hr>
+<center>
+<table summary="Clockgen logo" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center">
+			<img alt="Clockgen" src="clockgen.png">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top">Molecular Clock Simulator</td>
+	</tr>
+</table>
+</center>
+<p align="center">
+<a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; 
+<a href="quickstart.html">quickstart</a> &middot;
+<a href="references.html">references</a> &middot; 
+<a href="idx.html">index</a>
+</p>
+
+<hr>
+
+<!- Cabeçalho -!>
+
+<h2>
+	<a name="intro">Introduction</a>
+</h2>
+	<p>
+		Clockgen has been developed with the objective of creating a database of
+		nucleotide sequences that evolve in a clock-like fashion, so we can use 
+		these sequences to simulate complete phylogenies and compare them with the 
+		ones obtained with real life data. For that reason it's output is in 
+		the FASTA format (which can be read by almost all phylogenetic softwares).
+	</p>
+	
+	<p>
+		Following the model of evolution, and the parameters described below, 
+		clockgen creates a full phylogeny from a first (ancestral) sequence
+		which may be randomly generated or not. Each run of the program generates
+		a valid FASTA file with all the sequences generated. The output is written
+		to the standard output, which can be easily redirected to any filename you
+		might wish.
+	</p>
+	
+	<p>
+		Clockgen has the flexibility of reading in any Model of Evolution derived 
+		from the General Reversible Model. The software package provides most of the 
+		commonly used (and computationaly tractable) models of DNA evolution. The 
+		simple file format for the Model input is described below.
+	</p>
+	<h3>
+		<a name="models">Models of Evolution</a>
+	</h3>
+		<p>
+			All models of nucleotide substitution compatible with Clockgen are
+			Markov models, and assume evolution is independent and indentical at each
+			site and along each lineage. Almost all models used in the maximum
+			likelihood reconstruction of phylogenies using nucleotide sequences are
+			processes of this type (but see Yang, 1994).
+		</p>
+		<p>
+			The models are provided in the matrix form: 
+			<center>
+			<table>
+				<tr align="center">
+					<td>General Reversible</td>
+					<td>Jukes-Cantor</td>
+					<td>Kimura 2 Parameters</td>
+				</tr>
+				<tr align="center">
+					<td>
+						<table cellspacing=5>
+							<tr align="center">
+								<th></th>
+								<th>A</th>
+								<th>C</th>
+								<th>G</th>
+								<th>T</th>
+							</tr>
+							<tr align="center"><th>A</th><td>0.0</td><td>a</td><td>b</td><td>c</td></tr>
+							<tr align="center"><th>C</th><td>a</td><td>0.0</td><td>d</td><td>e</td></tr>
+							<tr align="center"><th>G</th><td>b</td><td>c</td><td>0.0</td><td>f</td></tr>
+							<tr align="center"><th>T</th><td>d</td><td>e</td><td>f</td><td>0.0</td></tr>
+						</table>
+					</td>
+					<td>
+						<table cellspacing=5>
+							<tr align="center">
+								<th></th>
+								<th>A</th>
+								<th>C</th>
+								<th>G</th>
+								<th>T</th>
+							</tr>
+							<tr align="center"><th>A</th><td>0.0</td><td>0.25</td><td>0.25</td><td>0.25</td></tr>
+							<tr align="center"><th>C</th><td>0.25</td><td>0.0</td><td>0.25</td><td>0.25</td></tr>
+							<tr align="center"><th>G</th><td>0.25</td><td>0.25</td><td>0.0</td><td>0.25</td></tr>
+							<tr align="center"><th>T</th><td>0.25</td><td>0.25</td><td>0.25</td><td>0.0</td></tr>
+						</table>
+					</td>
+					<td>
+						<table cellspacing=5>
+							<tr align="center">
+								<th></th>
+								<th>A</th>
+								<th>C</th>
+								<th>G</th>
+								<th>T</th>
+							</tr>
+							<tr align="center"><th>A</th><td>0.0</td><td>y</td><td>y</td><td>x</td></tr>
+							<tr align="center"><th>C</th><td>y</td><td>0.0</td><td>x</td><td>y</td></tr>
+							<tr align="center"><th>G</th><td>y</td><td>x</td><td>0.0</td><td>y</td></tr>
+							<tr align="center"><th>T</th><td>x</td><td>y</td><td>y</td><td>0.0</td></tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			</center>
+			<p>
+				Where each variable is the rate of substitution between the nucleotide in the 
+				row and the nucleotide in the column. All rows must sum 1.0. 
+			</p>
+			<p>
+				The General Reversible model has 6 variables that work like this, and thus can.
+				be manipulated in order to represente any given reversible model. But the Kimura
+				2 Parameters has only two variables (x and y), that represent transversions_rate
+				transitions rate respectively. These values must be assigned according to the
+				following formula so that the "All rows must sum 1.0" rule stands: 
+			</p>
+			<div style="margin-left: 1em">
+				<tt>transitions_rate</tt> + 2*<tt>transversions_rate</tt> = 1.0
+			</div>
+
+		</p>
+			
+	<h3>
+		<a name="bottleneck">Transmission Bottleneck</a>
+	</h3>
+
+	<p>
+		Transmission bottleneck may be simulated with clockgen by making use of the 
+		parameter "-i" which allows you to provide a sequence as the Ancestral for 
+		simulation, and "-hi" making different hosts for each simulation. 
+	</p>
+	<p>
+		Basically you should run a complete simulation, then open the output file and select the 
+		sequence you want to simulate the transmission. Copy and paste it into a new file, alone, 
+		and give it as input for a new simulation. Now you'll have two evolutionary trees, that
+		evolved independantly in different environments after the transmission. This can be
+		repeated as many times as you need.
+	</p>
+	
+<h2>
+	<a name="parameters">Command line arguments</a>
+</h2>
+
+	<h3>
+		<a name="ngens">Number of Generations (-g number)</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Defines the number of generations to be simulated. [* REQUIRED *]
+	</div>
+	
+	<h3>
+		<a name="mutations">Mutations per Evolution - or clock (-m number)</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Number of mutations to occur on each evolutionary step. [* REQUIRED *]
+	</div>
+	
+	<h3>
+		<a name="nucleotides">Nucleotides - the size of the sequences (-n number)</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Number of nucleotides on the sequence to be generated. This option implies that
+		the program must generate a random first sequence. You must use one of the two
+		options -n or -i. [* MUST USE THIS OR -i *]
+	</div>
+	
+	<h3>
+		<a name="ancestral">First Sequence (-i filename)</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Fasta file with 1 strain to be used as the first strain in the simulation.
+		You must use one of the two options -n or -i. [* MUST USE THIS OR -n *]
+	</div>
+
+	<h3>
+		<a name="immunity">Host Immunity Factor (-hi number)</a>
+	</h3>
+
+	<div style="margin-left: 2em">
+		Defines the host native immunity to this species. The number must be between
+		0 and 1 [0-1]. If no Native Host Immunity is defined, 0.0 is assumed.
+	</div>
+
+	<h3>
+		<a name="desc">Description File Output (-d)</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Writes the description file with the name of the strain appended by .desc
+	</div>
+
+
+	<h3>
+		<a name="evolmodel">Evolutionary Model (-em model [parameters])</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Uses the evolutionary model described. If not specified, the JC model is used.
+		The following models are implemented:<br><br>
+
+		<table width=600 border=1 align=center>
+			<tr align=center>
+				<th>Model Name</th>
+				<th>Model</th>
+				<th>Parameters (All parameters are decimal numbers)</th>
+			</tr>
+			<tr align=center>
+				<td>Juckes-Cantor</td>
+				<td>JC</td>
+				<td>No parameters</td>
+			</tr>
+			<tr align=center>
+				<td>Kimura 2 Parameters</td>
+				<td>K2P</td>
+				<td>transitions_rate transversions_rate</td>
+			</tr>
+			<tr align=center>
+				<td>General Reversible</td>
+				<td>REV</td>
+				<td>AC AG AT CG CT GT</td>
+			</tr>
+		</table>
+
+		<p>
+			Be aware of the <a href="references.html#models">rules of an evolutionary 
+			model matrix</a> before using specific parameters.
+		</p>
+	</div>
+	
+
+	<h3>
+		<a name="name">Strain Name (-s name)</a>
+	</h3>
+	
+	<div style="margin-left: 2em">
+		Name of the strains (indexes will be added in the output).
+		Example:
+		-s strain  => strain0x1, strain1x2, strain2x2, strain3x3, strain4x3, strain5x3, ...
+		<p>
+			If no name is provided, a default name of Taxon is used.
+		</p>
+	</div>
+	
+	
+
+
+<!- Rodape -!>
+
+<br>
+<hr>
+<p align="center">
+	<a href="index.html">home</a> &middot;
+	<a href="index.html#down">download</a> &middot; 
+	<a href="quickstart.html">quickstart</a> &middot;
+	<a href="references.html">references</a> &middot; 
+	<a href="idx.html">index</a>
+</p>
+</body>
+</html>

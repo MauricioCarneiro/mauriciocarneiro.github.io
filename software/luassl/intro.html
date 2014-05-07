@@ -1,0 +1,162 @@
+<html>
+<head>
+   <!-- start of google analytics --!>
+   <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     _uacct = "UA-72381-4";
+     urchinTracker();
+   </script>
+   <!-- end of google analytics --!>
+  <title>LuaSSL : Securing Lua Connections</title>
+  <style type="text/css">
+ul { list-style-type: disc };
+  </style>
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<hr>
+<center>
+<table summary="LuaSSL logo" border="0" cellspacing="0"
+ cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="http://www.lua.org"> <img
+ style="border: 0px solid ; width: 128px; height: 128px;"
+ alt="LuaSSL" src="luassl2.png" title=""></a> </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top">Securing Lua Connections <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p align="center">
+<a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; <a href="intro.html">quickstart</a>
+&middot;
+<a href="references.html">references</a> &middot; <a href="idx.html">index</a>
+</p>
+
+
+<hr>
+<h2><a name="intro">Quickstart</a></h2>
+<p>Below is a little introduction on how to get the library up and
+running with your applications and a little introduction on secure 
+network programming with LuaSSL.  </p>
+
+
+<h2><a name="init">Initializing the library</a></h2>
+<p>First of all, you'll need OpenSSL 0.9.6 or higher installed on
+your machine. If you are going to compile the sources of LuaSSL,
+you'll also need to have the Kerberos' include files (as OpenSSL makes
+use of them), and you may be required to change the directory in 
+makefile that points to it.</p>
+
+<p>To have the library functions made available to a Lua script, the
+interpreter running the script must be linked to the <tt>luassl</tt>
+library. The functions are registered in the Lua state given as the
+parameter to the function <tt>luaopen_ssllib</tt>, the only C
+function exported by the library. The scripts can then use all
+registered functions. </p>
+
+
+<h2> <a name="prog"> Secure Network programming with LuaSSL </a></h2>
+<p>The network support in the Lua language could closely mirror the C API
+or could implement a new, independent, transport layer abstraction.
+Having an API similar to the C API would make things easier for those
+who are used to socket programming. On the other hand, the simplicity of
+the Lua language would be lost. We ended up with something in between,
+in the sense that function names and semantics have been copied from the
+C API whenever possible, whereas their usage in Lua has been greatly
+simplified. Add to that, the strong possibility that this library will
+become a joint project with <tt>luasocket</tt>, what greatly suggests
+that we mimic it's interface.</p>
+
+<p>The first point to be made between plain network connections (done using
+luasocket) and secure connections, is that by using SSL you're paying both
+processing time and amount of data sent, to make things secure. Another 
+important point is that you can use all levels of security with SSL, since
+the most unprotected traffic (almost simillar to plain connections) to the
+most complex security handled communication.</p>
+
+<p>Although these options are made available through the huge C API of OpenSSL,
+the Lua binding does not intend to fully supply you with these options. Rather
+the LuaSSL API is pretty small, aiming a simpler way to make well secured
+applications.</p>
+
+<p>A good comparison here between the C and LUA API's can be found by the ECHO 
+example :</p>
+
+<h3>Server Code</h3>
+A simple echo server with SSL connection, doing handshake, RSA key exchanging 
+and certification (server key file : <i>server.pem</i> and certificate :
+<i>rootcert.pem</i>) and kindly closing the connection with a EOF.
+
+<pre>
+    function server_loop(s)
+        while true do
+            local a, e = s:read()
+            if e == 0 then return true -- 0 for end of file
+            else if e then return false end end -- halt on anything else
+            io.write(a)
+        end
+        return true
+    end
+
+
+    local s = ssl.wrap("keys/server.pem", "keys/rootcert.pem", nil, "keys/dh1024.pem")
+    s:bind(16001)
+
+    while true do 
+        s:accept()
+        print("Connection Opened") 
+        if server_loop(s) then
+            s:shutdown()
+            print("Connection Closed") 
+        else
+            s:clear()
+            print("Connection Cleared")
+        end
+    end
+</pre>
+
+<h3>Client Code</h3>
+The equivalent client that successfully connects with all SSL requirements 
+and keeps sending data until EOF is entered (in unix : CTRL+D, windows: CTRL+z).
+
+<pre>
+    function client_loop (s)
+        while true do
+            local a = io.read("*l")
+            if a == nil then break end 
+            local e = s:write(a.."\n")
+            if e then return false end
+        end
+        return true
+    end
+
+    local s = ssl.wrap("keys/client.pem", "keys/rootcert.pem")
+    s:connect("localhost", 16001)
+    print("Connection Opened")
+    if (client_loop(s)) then
+        print("Connection Closed")
+        s:shutdown()
+    else
+        print("Connection Cleared")
+        s:clear()
+    end
+    s:free()
+</pre>
+
+
+<h3>C code</h3>
+The equivalent C code for this application has 4 files and about 400 lines
+of code.  You can download it <a href="http://www.opensslbook.com/code.html">here</a>. 
+
+<hr>
+<p align="center"><a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; <a href="intro.html">quickstart</a> &middot;
+<a href="references.html">references</a> &middot; <a href="idx.html">index</a>
+</p>
+</body>
+</html>

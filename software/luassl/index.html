@@ -1,0 +1,101 @@
+<html>
+<head>
+   <!-- start of google analytics --!>
+   <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     _uacct = "UA-72381-4";
+     urchinTracker();
+   </script>
+   <!-- end of google analytics --!>
+  <title>LuaSSL : Securing Lua Connections</title>
+  <style type="text/css">
+ul { list-style-type: disc };
+  </style>
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<hr>
+<center>
+<table summary="LuaSSL logo" border="0" cellspacing="0"
+ cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="http://www.lua.org"> <img
+ style="border: 0px solid ; width: 128px; height: 128px;"
+ alt="LuaSSL" src="luassl2.png" title=""></a> </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top">Securing Lua Connections <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p align="center">
+<a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; <a href="intro.html">quickstart</a>
+&middot;
+<a href="references.html">references</a> &middot; <a href="idx.html">index</a>
+</p>
+
+<hr>
+
+<h2><a name="whatis">What is LuaSSL</a></h2>
+<p>LuaSSL is a Lua extension library that provides secure connections
+over the TCP protocol. It is based on the free library <a
+href="http://www.openssl.org/">OpenSSL</a>, and <br>
+provides the security the Secure Socket Layer has to offer with a great
+ease in its use.</p>
+<p>The first goal of LuaSSL is to make available a simple
+implementation of the SSL to every&nbsp; Lua application which&nbsp;
+needs network security, authentication issues or simply some
+criptography. With LuaSSL, you won't need to master all the <a
+href="http://www.openssl.org/">OpenSSL</a> api
+to make secure connections over the internet.</p>
+<p>The code is yet in an alpha stage, but it has been tested over
+Windows and Linux (other OS's are yet to be tested).</p>
+<p>The library is available under the same <a
+ href="http://www.lua.org/copyright.html">
+terms and conditions</a> as the Lua language, that is, it can be used
+at no cost for both academic and commercial purposes. </p>
+<p><i>Author:</i> <b>Mauricio Oliveira Carneiro</b></p>
+
+<br>
+
+<h2><a name="whatcant">What You Can't Do With LuaSSL</a></h2>
+<p>As LuaSSL is a simplification of the <a
+href="http://www.openssl.org">OpenSSL</a> API, there are some things 
+that can't be done with LuaSSL. Here is a brief list of what LuaSSL can't
+do:</p>
+<ul>
+  <li>Multiple sessions.</li>
+  <li>Non-Blocking I/O.</li>
+  <li>Command line encrypting/decrypting.</li>
+  <li>Generation of keys (Private/Public).</li>
+</ul>
+<p>Some of these features were not implemented just for the sake of
+simplicity (multiple sessions and non-blocking I/O). The others are 
+not intended to be in the LuaSSL package, since it's not a general 
+crypto library like <a href="http://www.openssl.org/">OpenSSL</a>, it just handles the SSL connections part
+of <a href="http://www.openssl.org/">OpenSSL</a>. For the command line
+tool, you can use the <a href="http://www.openssl.org/">OpenSSL</a> one.</p>
+
+<p>Comments and requests about what should be implemented are very welcome!
+</p>
+
+<br>
+
+<h2><a name="down">Download</a></h2>
+<p>The first final version of LuaSSL has been released! A few bugs were corrected from the previous alpha version. The source code can be downloaded 
+here:</p>
+<a href="luassl-1.0.zip">luassl-1.0.zip</a> (2006/11/09)
+<p>Besides the full C and Lua source code for the library, the distribution
+contains some examples, this user's manual and the test procedures.</p>
+
+
+<hr>
+<p align="center"><a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; <a href="intro.html">quickstart</a> &middot;
+<a href="references.html">references</a> &middot; <a href="idx.html">index</a>
+</p>
+</body>
+</html>

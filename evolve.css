@@ -1,0 +1,745 @@
+BODY
+{
+	background-color: #dddddd;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	font-family: Optima, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+A:link { color: #10105b; text-decoration: none; }
+A:visited { color: #10105b; text-decoration: none; }
+A:hover { color: #483d8b; text-decoration: none; }
+A:active { color: #10105b; text-decoration: none; }
+
+H1, H2, H3, H4, H5, H6 { 
+	color: #10105b;
+	font-weight: bold;
+	font-size: 14px;
+	padding-left: 1em;
+}
+
+P { 
+	color: black;
+	font-size: 12px;
+	padding-left: 1em;
+}
+
+.minor-title
+{
+	color: #10105b;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.major-title
+{
+	color: #10105b;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.main-title
+{
+	color: #483d8b;
+	font-weight: bold;
+	font-size: 36px;
+}
+
+.nav-title, .button-title
+{
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Optima, Arial, Helvetica, sans-serif;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.nav-title:hover, .button-title:hover
+{
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Optima, Arial, Helvetica, sans-serif;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.nav-title-disabled, .button-title-disabled
+{
+	color: #9f9f9f;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	text-align: center;
+	vertical-align: middle;
+}
+
+TABLE.grey-box { background-color: #e3e3e3; }
+.grey-box TH { background-color: #cccccc; }
+TABLE.blue-box { background-color: #a0a0e0; }
+.blue-box TH { background-color: #9090d0; }
+TABLE.red-box { background-color: #CC6699; }
+.red-box TH { background-color: #BB5588; }
+TABLE.white-box { background-color: #ffffff; }
+.white-box TH { background-color: #cccccc; }
+
+.box-title
+{
+	color: white;
+	text-align: left;
+	padding-left: 1em;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.box-body
+{
+	color: black;
+	padding-left: 3em;
+	font-size: 12px;
+}
+
+.box-description
+{
+	color: black;
+    text-align: center;
+	font-size: 12px;
+}
+
+/* Lists don't need the indented margins: */
+.box-body OL { padding-left: 1em; }
+.box-body UL { padding-left: 1em; }
+.box-body DL { padding-left: 1em; }
+
+.grey-box .box-subtitle
+{
+	border-top: thin solid #cccccc;
+	color: #10105b;
+	padding-left: 2em;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.blue-box .box-subtitle
+{
+	border-top: thin solid #9090d0;
+	color: #10105b;
+	padding-left: 2em;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.red-box .box-subtitle
+{
+	border-top: thin solid #BB5588;
+	color: #10105b;
+	padding-left: 2em;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.white-box .box-subtitle
+{
+	border-top: thin solid #cccccc;
+	color: #10105b;
+	padding-left: 2em;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.box-info
+{
+	color: #717171;
+	padding-left: 3em;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.box-info-right
+{
+	color: #717171;
+	text-align: right;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.box-info-flush
+{
+	color: #717171;
+	text-align: left;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.box-extra
+{
+	color: #000000;
+	padding-left: 5em;
+	font-size: 10px;
+}
+
+.box-extra-left
+{
+	color: #000000;
+	text-align: left;
+	font-size: 10px;
+}
+
+
+.box-extra-right
+{
+	color: #000000;
+	text-align: right;
+	font-size: 10px;
+}
+
+.box-extra-flush
+{
+	color: #000000;
+	text-align: left;
+	font-size: 10px;
+}
+
+.grey-box .button TD.button-left
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonLeft.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.grey-box .button TD.button-right
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonRight.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.grey-box .button TD.button-fill
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonFill.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.grey-box .button:hover TD.button-left
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonLeftSelected.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.grey-box .button:hover TD.button-right
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonRightSelected.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.grey-box .button:hover TD.button-fill
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonFillSelected.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.grey-box .button-disabled TD.button-left
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonLeftDisabled.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.grey-box .button-disabled TD.button-right
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonRightDisabled.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.grey-box .button-disabled TD.button-fill
+{
+	background-image: url(decoration/Grey/GreyBox/ButtonFillDisabled.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.grey-box TD.box-top-left
+{
+	background-image: url(decoration/Grey/GreyBox/TopLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.grey-box TD.box-top-right
+{
+	background-image: url(decoration/Grey/GreyBox/TopRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.grey-box TD.box-top
+{
+	background-image: url(decoration/Grey/GreyBox/Top.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.grey-box TD.box-left
+{
+	background-image: url(decoration/Grey/GreyBox/Left.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.grey-box TD.box-left-divider
+{
+	background-image: url(decoration/Grey/GreyBox/LeftDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.grey-box TD.box-right
+{
+	background-image: url(decoration/Grey/GreyBox/Right.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.grey-box TD.box-right-divider
+{
+	background-image: url(decoration/Grey/GreyBox/RightDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.grey-box TD.box-bottom-left
+{
+	background-image: url(decoration/Grey/GreyBox/BottomLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.grey-box TD.box-bottom-right
+{
+	background-image: url(decoration/Grey/GreyBox/BottomRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.grey-box TD.box-bottom
+{
+	background-image: url(decoration/Grey/GreyBox/Bottom.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.grey-box TD.box-divider
+{
+	background-image: url(decoration/Grey/GreyBox/Divider.gif);
+	background-repeat: repeat-x;
+	height: 9px;
+}
+
+.blue-box .button TD.button-left
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonLeft.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.blue-box .button TD.button-right
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonRight.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.blue-box .button TD.button-fill
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonFill.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.blue-box .button:hover TD.button-left
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonLeftSelected.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.blue-box .button:hover TD.button-right
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonRightSelected.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.blue-box .button:hover TD.button-fill
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonFillSelected.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.blue-box .button-disabled TD.button-left
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonLeftDisabled.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.blue-box .button-disabled TD.button-right
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonRightDisabled.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.blue-box .button-disabled TD.button-fill
+{
+	background-image: url(decoration/Grey/BlueBox/ButtonFillDisabled.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.blue-box TD.box-top-left
+{
+	background-image: url(decoration/Grey/BlueBox/TopLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.blue-box TD.box-top-right
+{
+	background-image: url(decoration/Grey/BlueBox/TopRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.blue-box TD.box-top
+{
+	background-image: url(decoration/Grey/BlueBox/Top.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.blue-box TD.box-left
+{
+	background-image: url(decoration/Grey/BlueBox/Left.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.blue-box TD.box-left-divider
+{
+	background-image: url(decoration/Grey/BlueBox/LeftDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.blue-box TD.box-right
+{
+	background-image: url(decoration/Grey/BlueBox/Right.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.blue-box TD.box-right-divider
+{
+	background-image: url(decoration/Grey/BlueBox/RightDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.blue-box TD.box-bottom-left
+{
+	background-image: url(decoration/Grey/BlueBox/BottomLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.blue-box TD.box-bottom-right
+{
+	background-image: url(decoration/Grey/BlueBox/BottomRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.blue-box TD.box-bottom
+{
+	background-image: url(decoration/Grey/BlueBox/Bottom.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.blue-box TD.box-divider
+{
+	background-image: url(decoration/Grey/BlueBox/Divider.gif);
+	background-repeat: repeat-x;
+	height: 9px;
+}
+
+.red-box TD.box-top-left
+{
+	background-image: url(decoration/Grey/RedBox/TopLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.red-box TD.box-top-right
+{
+	background-image: url(decoration/Grey/RedBox/TopRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.red-box TD.box-top
+{
+	background-image: url(decoration/Grey/RedBox/Top.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.red-box TD.box-left
+{
+	background-image: url(decoration/Grey/RedBox/Left.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.red-box TD.box-left-divider
+{
+	background-image: url(decoration/Grey/RedBox/LeftDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.red-box TD.box-right
+{
+	background-image: url(decoration/Grey/RedBox/Right.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.red-box TD.box-right-divider
+{
+	background-image: url(decoration/Grey/RedBox/RightDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.red-box TD.box-bottom-left
+{
+	background-image: url(decoration/Grey/RedBox/BottomLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.red-box TD.box-bottom-right
+{
+	background-image: url(decoration/Grey/RedBox/BottomRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.red-box TD.box-bottom
+{
+	background-image: url(decoration/Grey/RedBox/Bottom.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.red-box TD.box-divider
+{
+	background-image: url(decoration/Grey/RedBox/Divider.gif);
+	background-repeat: repeat-x;
+	height: 9px;
+}
+
+.white-box .button TD.button-left
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonLeft.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.white-box .button TD.button-right
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonRight.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.white-box .button TD.button-fill
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonFill.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.white-box .button:hover TD.button-left
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonLeftSelected.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.white-box .button:hover TD.button-right
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonRightSelected.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.white-box .button:hover TD.button-fill
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonFillSelected.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.white-box .button-disabled TD.button-left
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonLeftDisabled.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.white-box .button-disabled TD.button-right
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonRightDisabled.gif);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 20px;
+}
+
+.white-box .button-disabled TD.button-fill
+{
+	background-image: url(decoration/Grey/WhiteBox/ButtonFillDisabled.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.white-box TD.box-top-left
+{
+	background-image: url(decoration/Grey/WhiteBox/TopLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.white-box TD.box-top-right
+{
+	background-image: url(decoration/Grey/WhiteBox/TopRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.white-box TD.box-top
+{
+	background-image: url(decoration/Grey/WhiteBox/Top.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.white-box TD.box-left
+{
+	background-image: url(decoration/Grey/WhiteBox/Left.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.white-box TD.box-left-divider
+{
+	background-image: url(decoration/Grey/WhiteBox/LeftDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.white-box TD.box-right
+{
+	background-image: url(decoration/Grey/WhiteBox/Right.gif);
+	background-repeat: repeat-y;
+	width: 20px;
+}
+
+.white-box TD.box-right-divider
+{
+	background-image: url(decoration/Grey/WhiteBox/RightDivider.gif);
+	background-repeat: repeat-y;
+	height: 9px;
+	width: 20px;
+}
+
+.white-box TD.box-bottom-left
+{
+	background-image: url(decoration/Grey/WhiteBox/BottomLeft.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.white-box TD.box-bottom-right
+{
+	background-image: url(decoration/Grey/WhiteBox/BottomRight.gif);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.white-box TD.box-bottom
+{
+	background-image: url(decoration/Grey/WhiteBox/Bottom.gif);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.white-box TD.box-divider
+{
+	background-image: url(decoration/Grey/WhiteBox/Divider.gif);
+	background-repeat: repeat-x;
+	height: 9px;
+}
+

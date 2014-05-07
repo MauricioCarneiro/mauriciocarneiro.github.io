@@ -1,0 +1,219 @@
+% LaTeX file for resume 
+% This file uses the resume document class (res.cls)
+
+\documentclass{res} 
+%\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
+\usepackage{newcent}   % uses new century schoolbook postscript font 
+\newsectionwidth{0pt}  % So the text is not indented under section headings
+\usepackage{fancyhdr}  % use this package to get a 2 line header
+\renewcommand{\headrulewidth}{0pt} % suppress line drawn by default by fancyhdr
+\setlength{\headheight}{24pt} % allow room for 2-line header
+\setlength{\headsep}{24pt}  % space between header and text
+\setlength{\headheight}{24pt} % allow room for 2-line header
+\pagestyle{fancy}     % set pagestyle for document
+\rhead{ {\it M. Carneiro}\\{\it p. \thepage} } % put text in header (right side)
+\cfoot{}                                     % the foot is empty
+\topmargin=-0.3in % start text higher on the page
+
+\begin{document}
+\thispagestyle{empty} % this page has no header  
+\name{MAURICIO CARNEIRO}% the \\[12pt] adds a blank line after name
+
+
+\begin{resume}
+(781) 333-8323 \hspace{23 mm} {\small 301 Binney st  \#5040, Cambridge, MA 02142} \hfill carneiro@gmail.com
+
+ 
+\section{\centerline{EDUCATION}} 
+\vspace{8pt} 
+
+{\bf Harvard University} \hfill Cambridge, MA\\
+{\sl Ph.D. Computational Biology} \hfill 2010\\
+
+\vspace{-18pt} 
+{\bf Oswaldo Cruz Research Institute} \hfill Rio de Janeiro, Brazil\\
+{\sl M. Sc. in Molecular Biology} \hfill 2005\\
+
+\vspace{-18pt} 
+{\bf Pontifical Catholic University} \hfill Rio de Janeiro, Brazil\\
+{\sl B.Sc. in Computer Engineering} \hfill 2003
+
+
+
+\section{\centerline{AWARDS}} 
+\vspace{8pt} 
+
+{\bf Harvard University} \hfill Cambridge, MA\\
+{\sl Distinction in Teaching Award} \hfill 2010\\
+{\sl Distinction in Teaching Award} \hfill 2008\\
+
+\vspace{-18pt} 
+{\bf ACM International Collegiate Programming Contest} \hfill Beverly Hills, CA\\
+{\sl Programming Excellence Award} \hfill  2003\\
+{\sl South American Champion} \hfill  2003\\
+{\sl 2nd Place of Brazil} \hfill  2002\\
+
+\vspace{-18pt} 
+{\bf Pontifical Catholic University} \hfill Rio de Janeiro, Brazil\\
+{\sl Best Mathematics Software Award} \hfill 1998
+
+
+%%\section{\centerline{TECHNICAL SKILLS}} 
+%%\vspace{8pt} 
+
+%%{\bf Programming Languages}\\
+%%{\sl Proficient: C/C++, LUA, HTML, TeX} \\
+%%{\sl Have also used: R, Java, SQL, Assembly, Mathematica, Scheme, PERL, PHP} \\
+
+%%\vspace{-18pt}
+%%{\bf Programming Toolkits}\\
+%%{\sl worked with: IUP, IUPLUA, BioLUA, BioPERL, SSL, OpenGL, GLUT, GTK, IM} \\
+
+%%\vspace{-18pt}
+%%{\bf Languages Spoken}\\
+%%{\sl English, Portuguese, Spanish, French} \\
+
+\section{\centerline{PROFESSIONAL EXPERIENCE}} 
+\vspace{8pt}
+
+{\bf Broad Institute} \hfill Cambridge, MA \\
+{\sl Computational Biologist}  \hfill December 2010 - present  
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Lead the technology development team in the genome sequencing and analysis group
+	\item Developed key software tools, using Java and Scala, for medical and population genetics and cancer research.
+	\item Worked with the laboratory to develop methods that improve sequencing data statistical analysis 
+	\item Defined the data processing pipeline for Pacific Bioscience RS data
+\end{itemize}
+
+{\bf M1nd Corporation} \hfill Rio de Janeiro, Brazil \\
+{\sl Team Leader}  \hfill November 2004 - May 2006  
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Managed a group of 50 beta testers.
+	\item Managed the development of the first location based role-playing game in the world (Alien Revolt) released in may 2004 with extensive press coverage. 
+	\item Formulated the game structure, dynamics and mathematical framework 
+	\item Managed the development team and assured the quality of every released item from developers and designers.
+\end{itemize}
+  
+{\bf Getulio Vargas Foundation (FGV)} \hfill Rio de Janeiro, Brazil \\
+{\sl Lead Game Developer} \hfill February 1998 - January 2000
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Managed a group of 11 developers, 12 designers and 3 musicians	
+	\item Designed and implemented, using C/C++, the game physics, intelligence, sound and video. 
+	\item Presented a lecture on the game engine technology to the Brazilian Ministry of Science and Technology.
+\end{itemize}
+
+\pagebreak
+
+{\bf Ebendinger Corporations} \hfill Rio de Janeiro, Brazil \\
+{\sl Systems Support} \hfill June 1996 - November 1997  
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Managed a database, using SQL, of over 80,000 physicians.
+	\item Developed network and database scripts, using PERL, to add to the robustness of the database.
+	\item Participated in the customer care team to users of the database.
+\end{itemize}
+
+
+\section{\centerline{RESEARCH EXPERIENCE}} 
+\vspace{8pt}
+
+{\bf Harvard University} \hfill Cambridge, MA \\
+{\sl Research Assistant in Computational Biology} \hfill September 2005 - present 
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Developed a statistical method, in C and LUA, to describe the evolution of fitness landscapes.
+	\item Developed a Markov Chain model, in C, to describe gene network development and evolution.
+	\item Developed scripts, in LUA, to aid in the fruit fly genome annotation project. 
+	\item Developed the BIOLUA library, in C and LUA, to determine the evolutionary patterns of amino-acid secondary structure.
+\end{itemize}
+
+{\bf Oswaldo Cruz Research Institute (FIOCRUZ)} \hfill Rio de Janeiro, Brazil \\
+{\sl Junior Researcher in Molecular Epidemiology} \hfill March 2003 - August 2004  
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Developed a simulator (clockgen), in C, that generates random nucleotide sequences based on the theory of the existence of a molecular clock
+	\item Studied Bioinformatics and Population Dynamics at the Pure and Applied Mathematics Institute of Rio de Janeiro (IMPA). 
+	\item Developed a research project on HIV Evolution which was awarded with a full scholarship from the UCSD Medical School at the XI HIV Dynamics and Evolution Workshop, in Sweden - May 2004.
+\end{itemize}
+
+{\bf TECGRAF (PUC-RJ)} \hfill Rio de Janeiro, Brazil \\
+{\sl Junior Researcher in Computer Graphics} \hfill March 2000 - March 2003  
+\begin{itemize} \itemsep -2pt % reduce space between items
+	\item Developed research on multi-platform libraries and tools. 
+	\item Developed 2 LUA libraries (IUPLUA and LUASSL), 1 sound and multimedia project and a user interface toolkit (IUP) in C/C++. 
+\end{itemize}
+
+
+\section{\centerline{PUBLICATIONS}} 
+\vspace{8pt}
+
+
+1000 Genomes Consortium. 2012. An integrated map of genetic variatoin in 1,092 human genomes. Nature - 491:56-65
+
+
+{\bf Carneiro M}, Russ C, Ross MG, Gabriel S, Nusbaum C, DePristo MA. 2012. Pacific biosciences sequencing technology for genotyping and variation discovery in human data - BMC Genomics 2012, 13:375
+
+
+Pugh TJ, Weeraratne SD, Archer TC, Krummel DA, Auclair D, Bochicchio J, {\bf Carneiro M} et al. 2012. Medulloblastoma exome sequencing uncovers subtype-specific somatic mutations. Nature 488:106-110
+
+
+{\bf Carneiro M}, Hartl DL. 2011. Model transcription networks with continuously varying expression levels. BMC Evolutionary Biology - Accepted. In Press.
+
+
+{\bf Carneiro M}, Hartl DL. 2010. Adaptive landscapes and protein evolution. Proceedings of the National Academy Sciences USA 107:1747-51.
+
+
+Sackton T, ..., {\bf Carneiro M} et al. 2009. Population genomic inferences from sparse high-throughput sequencing of two populations of Drosophila melanogaster. Genome Biology and Evolution, 449 - 465.
+
+
+{\bf Carneiro M}, Pinto M, Struchiner CJ. 2004. Analysis of the molecular clock hypothesis for the brazilian HIV-I subtype. In Proceedings of the 11th International Workshop on HIV Dynamics and Evolution
+  
+
+\section{\centerline{TEACHING EXPERIENCE}} 
+\vspace{8pt}
+
+{\bf Harvard University} \hfill Cambridge, MA\\
+Modeling and Differential Equations (fall 06, 07, 08, 09 and 10, spring 09 and \textit{teaching award} in 10), Intensive Introduction to Computer Science (summer 08, 09), Intensive Introduction to Data Structures (summer 08, 09), Dinosaurs and their Relatives (\textit{teaching award} - spring 2008), Genetics, Genomics and Evolution (spring 2007)
+
+{\bf PUC-RJ, FIOCRUZ and Technology \& Training} \hfill Rio de Janeiro, Brazil\\
+Advanced Topics in Algorithms (2003), Interactive Computer Graphics (2001), Data Structures (2000-2001),  Evolutionary Basis of Public Health (2003), Game Development (2004).
+
+\section{\centerline{LEADERSHIP EXPERIENCE}} 
+\vspace{8pt}
+
+{\bf Harvard University Graduate Soccer Team} \hfill Cambridge, MA\\
+{\sl GSAS Soccer Team Captain} \hfill 2006 -  2010\\
+{\sl Dudley Soccer Team Captain} \hfill 2006 -  2010
+
+\vspace{-10pt}
+{\bf Harvard Organization for Brazilian Leadership and Entrepreneurship} \hfill Cambridge, MA\\
+{\sl Co-Founder and Vice-President} \hfill 2008 - 2010
+
+\section{\centerline{ADDITIONAL COURSES}} 
+\vspace{8pt}
+
+{\bf University of Washington} \hfill Seattle, WA\\
+{\sl Summer Institute in Statistical Genetics} \hfill 2006 and 2007
+
+\vspace{-10pt} 
+{\bf Pure and Applied Mathematics Institute (IMPA)} \hfill Rio de Janeiro, Brazil\\
+{\sl International Workshop in Biomathematics} \hfill 2004
+
+\vspace{-10pt} 
+{\bf Sao Luiz Info School } \hfill Rio de Janeiro, Brazil\\
+{\sl Introduction to Pascal} \hfill 1987\\
+{\sl Advanced Basic Programming} \hfill 1986\\
+{\sl Introduction to Basic Programming} \hfill 1986\\
+
+\end{resume} 
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+

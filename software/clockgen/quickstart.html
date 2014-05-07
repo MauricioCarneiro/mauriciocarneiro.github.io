@@ -1,0 +1,132 @@
+<html>
+<head>
+   <!-- start of google analytics --!>
+   <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     _uacct = "UA-72381-4";
+     urchinTracker();
+   </script>
+   <!-- end of google analytics --!>
+  <title>Clockgen: Molecular Clock Simulator</title>
+  <style type="text/css">
+ul { list-style-type: disc };
+  </style>
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<hr>
+<center>
+<table summary="Clockgen logo" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center">
+			<img alt="Clockgen" src="clockgen.png">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top">Molecular Clock Simulator</td>
+	</tr>
+</table>
+</center>
+<p align="center">
+<a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; 
+<a href="quickstart.html">quickstart</a> &middot;
+<a href="references.html">references</a> &middot; 
+<a href="idx.html">index</a>
+</p>
+
+<hr>
+
+<!- Cabeçalho -!>
+
+<h2>Quickstart</h2>
+	<h3><a name="install">Instalation</a></h3>
+	<p>
+		As simple as unpack, make, make install. The usual commands for that are 
+		as follows:
+		<ul> <tt>
+			<li> tar xjf clockgen-x.x.tar.bz2</li>
+			<li> cd clockgen</li>
+			<li> configure</li>
+			<li> make</li>
+			<li> make install (as root)</li>
+			 </tt>
+		</ul>
+		Just to check your installation, type "which clockgen" and make sure you
+		get a positive response. As for other systems, try getting the compiled 
+		distribution, if available. 
+	</p>
+
+	<h3><a name="simple">Running a Simple Simulation</a></h3>
+	<p>
+		This simple command makes a first simulation: 
+		<div style="margin-left: 1em">
+			<tt>clockgen -g 3 -n 20 -m 5</tt>
+		</div>
+	</p>
+	<p>
+		With this simulation we obtain a phylogeny with 6 sequences originated 
+		from a random 20 nucleotides ancestral, written to the standard output. 
+		By looking at the parameters we get that:
+
+		<ul>
+			<li> We had a phylogeny of 3 generations (the -g 3)</li>
+			<li> Each new sequence has 5 mutations from it's most recent ancestral (the -m 5)</li>
+			<li> And finally, all sequences have 20 nucleotides in length (the -n 20)</li>
+		</ul>
+
+		With only these parameters we are able to create an infinite database 
+		of sequences varying their lengths and clocks. Of course we can go much 
+		further with the other parameters of the program. We can see a few uses 
+		of some of them here.
+	</p>
+	<p>
+		We can simply redirect this output to a file "output.fasta" by using the following command: 
+
+		<div style="margin-left: 1em">
+			<tt>clockgen -g 3 -n 20 -m 5 > output.fasta</tt>
+		</div>
+
+		
+	<h3><a name="model">Different Models of Evolution</a></h3>
+	<p>
+		The default model of evolution is the JC model, which makes all mutations 
+		have the same probability. We can change that by providing Clockgen another 
+		model. The software comes with the most commonly used models of DNA 
+		substitution (K2P for example). If you want to use the K2P, for example, 
+		with different transition and transversion rates, just type the following 
+		command: 
+
+		<div style="margin-left: 1em">
+			<tt>clockgen -g 3 -n 20 -m 5 -em K2P 0.5 0.25</tt>
+		</div>
+	</p>
+	<p> 
+		The first parameter is the transition rate, the second is the transversion rate. Remember that these values must satisfy the following formula : transsition_rate + 2*transversion_rate = 1.0.
+	</p>
+
+
+	<h3><a name="cosmetic">Cosmetics</a></h3>
+	<p>
+		Sometimes it's good to keep track of what has been done when you generate lots of datasets in order not to get lost. For that Clockgen provides two cosmetic contributions. First you can name the sequences being generated, by using -s name. The naming patterns are described in the <a href="references.html#name">references</a>. The other is forcing the program to write the description file, which is a little log of what parameters were used to generate the respective phylogeny. For example : 
+
+		<div style="margin-left: 1em">
+			<tt>clockgen -g 3 -n 20 -m 5 -s pork -d > pork.fasta</tt>
+		</div>
+	</p>
+	<p>
+		Outputs the sequences the same way as our first example to the pork.fasta file, but it will name each sequence "pork", and will generate the file "pork.desc" with all the parameters you used to generate the pork phylogeny.
+	</p>
+			
+<!- Rodape -!>
+
+<br>
+<hr>
+<p align="center">
+	<a href="index.html">home</a> &middot;
+	<a href="index.html#down">download</a> &middot; 
+	<a href="quickstart.html">quickstart</a> &middot;
+	<a href="references.html">references</a> &middot; 
+	<a href="idx.html">index</a>
+</p>
+</body>
+</html>

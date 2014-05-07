@@ -1,0 +1,190 @@
+td {
+  vertical-align: top;
+}
+
+body {
+  font: 10pt Verdana, sans-serif;
+  color: #000000; 
+  background-color: #FFFFFF;
+  margin-top=0;
+  margin-left=0;
+  margin=0;
+}
+
+p {
+  text-indent: 5ex; 
+  margin: 0;
+}
+
+ul {
+  margin-top: 0; 
+  margin-bottom: 0;
+}
+
+a:link, a:visited {
+  color: #900000;
+  text-decoration: none 
+}
+
+a:hover {
+  color: #900000;
+  text-decoration: underline 
+}  
+
+a:active {
+  color: #FF0000;
+  text-decoration: underline 
+}
+
+.Header {
+  text-align: center;
+  font: 10pt Verdana, sans-serif;
+  color: #000000; 
+  padding-bottom: 1.5em;
+  border-width: 0 0 1px 0; 
+  border-style: solid; 
+  border-color: #000000;
+  margin: 1em 5ex 1.5em 5ex;
+}
+
+.Header .Name {
+  font-size: 18pt;
+  font-weight: bold; 
+  font-variant: small-caps; 
+}
+
+.Header .Note {
+  padding-top: 2px;
+  font-size: 8pt;
+}
+
+.BodyTable {
+  margin: 0 5ex; 
+}
+
+.SectionTitle {
+  font-size: 9pt;
+  padding-bottom: 1em; 
+  padding-top: 1px;
+}
+
+.SectionBody {
+  padding-left: 3ex;
+  padding-bottom: 1em;
+}
+
+.EducationTitle {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.EducationInstitution {
+  font-size: 9pt;
+}
+
+.AwardTitle {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.AwardInstitution {
+  font-size: 9pt;
+}
+
+.AwardDate {
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.CertificateTitle {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.CertificateGrade {
+  font-size: 9pt;
+}
+
+.CertificateDate {
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.ExperienceTitle {
+  font-size: 10pt;
+  font-weight: bold;
+  padding-top: 0.7em;
+}
+
+.ExperienceCompany {
+  font-size: 9pt;
+  padding-right: 1ex 
+}
+
+.ExperienceDescriptionTitle {
+  font-size: 9pt;
+  font-weight: bold;
+  padding-top: 1em
+}
+
+.ExperienceDescription {
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.ExperienceDates {
+  font-size: 10pt;
+  font-style: italic;
+}
+
+.TACourse {
+  font-size: 10pt;
+  font-weight: bold;
+  padding-top: 0.7em;
+}
+
+.TAAdvisor {
+  font-size: 9pt;
+  padding-right: 1ex 
+}
+
+.TAInstitution {
+  font-size: 9pt;
+  padding-right: 1ex 
+}
+
+
+.TADescription {
+  font-size: 9pt;
+  font-style: italic;
+  }
+
+.TADescriptionTitle {
+  font-size: 9pt;
+  font-weight: bold;
+  padding-top: 1em;
+}
+
+.TALevel {
+  color: red;
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.TADates {
+  font-size: 10pt;
+  font-style: italic;
+}
+.PublicationTitle {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.PublicationSource {
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.PublicationAuthors {
+  font-size: 9pt;
+} 

@@ -1,0 +1,442 @@
+<html>
+<head>
+   <!-- start of google analytics --!>
+   <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     _uacct = "UA-72381-4";
+     urchinTracker();
+   </script>
+   <!-- end of google analytics --!>
+  <title>LuaSSL : Securing Lua Connections</title>
+  <style type="text/css">
+ul { list-style-type: disc };
+  </style>
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<hr>
+<center>
+<table summary="LuaSSL logo" border="0" cellspacing="0"
+ cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="http://www.lua.org"> <img
+ style="border: 0px solid ; width: 128px; height: 128px;"
+ alt="LuaSSL" src="luassl2.png" title=""></a> </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top">Securing Lua Connections <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p align="center">
+<a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; <a href="intro.html">quickstart</a>
+&middot;
+<a href="references.html">references</a> &middot; <a href="idx.html">index</a>
+</p>
+
+
+<hr>
+<p><h2><a name"funcs">Class Functions</a></h2></p>
+<p><a name="wrap"><tt><b>ssl.wrap(</b>key, certificate [, certdir, dhfile, cipherlist, verify_options, options]<b>)</b></tt></a></p>
+<p>This is the most important function for the SSL context to be created
+with the user preferences. Several default values are already configured
+so that it's not really needed to know much about each of these options 
+to get your connection secure and running. Although it is highly recommended
+that you know what your doing.</p>
+<ul>
+    <li> <i>key</i> : The Private Key file in PEM format for the Application (or 
+         the person)</li><br>
+    <li> <i>certificate</i> : The Certificate Chain file in PEM format starting 
+         with the Certificate for the application and ending with the 
+         rootCA certificate. The file may contain more than one certificate.</li><br>
+    <li> <i>certidir</i> : The name of a directory containing CA certificates.
+         Each file in the directory must contain only a single CA certificate,
+         and the files must be named by the subject's name hash and an
+         extension of ".0".</li><br>
+    <li> <i>dhfile </i> : The file with the Diffie Hellman parameters for
+         ephemeral keying to be used. Ephemeral keying is explained 
+         <a href="references.html#ephemeral">here</a>.</li><br>
+    <li> <i>cipherlist</i> : list of ciphers to be used or not to be used in the 
+         connections. The patterns for this list are described 
+         <a href="references.html#cipherlist">here</a>. <tt>Default: 
+         "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH".</tt></li><br>
+    <li> <i>verify_options</i> : The sum of all options you want to set up for 
+         your peer verification procedure. The verify options are listed 
+         <a href="references.html#verify_options">here</a>. <tt>Default: 
+         SSL_VERIFY_PEER.</tt></li><br>
+    <li> <i>options</i> : The sum of all general options you want to set up for
+         your SSL context. The options are listed 
+         <a href="references.html#options">here</a>. <tt>Default: SSL_OP_ALL + 
+         SSL_OP_NO_SSLv2</tt></li><br>
+</ul>
+<p>This function returns a ssl object <tt>s</tt>, which is the object you'll use 
+for all your ssl operations described in the next section</p>
+
+
+<p><h2><a name="meth">SSL Object Methods</a></h2></p>
+
+<p><a name="accept"><tt><b>s:accept( )</b></tt></a></p>
+<p>Waits for an SSL client to attempt connection. It is responsible for 
+the first negotiations with the SSL client. They negotiate which 
+authentication method to use, which cipher and exchange public 
+keys/certificates to proove the authencity of both sides. If Ephemeral
+keying with Diffie Hellman algorithm is enabled with <tt>SSL_OP_SINGLE_DH_USE</tt>,
+all this negotiation is done using ephemeral keying.</p>
+
+<p><a name="bind"><tt><b>s:bind(</b>port<b>)</b></tt></a></p>
+<p>binds the <tt>s</tt> to the specified <tt>port</tt> on the local host. 
+Pay attention to the fact that only SSL servers can be bound to a socket,
+so <i>do not</i> use this function for connecting.</p>
+
+<p><a name="clear"><tt><b>s:clear( )</b></tt></a></p>
+<p>Safely closes a broken connection. Broken means that the peer has
+disconnected without negotiating a shutdown.</p>
+
+<p><a name="connect"><tt><b>s:connect(</b>address, port [, 
+exp_conn] <b>)</b></tt></a></p>
+<p>Make an attempt to connect to (<tt>address</tt>, <tt>port</tt>). 
+<tt>Address</tt> can be an IP address or a host name. It also performs
+all the negotiations needed by the SSL connection, and authenticates both 
+the client and the server, exchanging keys and certificates. If Ephemeral
+keying with Diffie Hellman algorithm is enabled with <tt>SSL_OP_SINGLE_DH_USE</tt>,
+all this negotiation is done using <a 
+href="references.html#ephemeral">ephemeral keying</a>.</p>
+<p>The optional parameter <tt>exp_conn</tt> stands for a post connection
+verification routine in which you will check the certificate sent
+by the peer, first of all, if it was really sent (i.e. this only makes
+sense if you are NOT using SSL_FAIL_IF_NO_PEER_CERTIFICATE). It also
+checks if the name recorded in the certificate is the same as 
+<tt>exp_conn</tt>, which means "the peer you were expecting".</p>
+
+
+<p><a name="read"><tt><b>s:read( )</tt></b></a></p>
+<p>
+The function returns the decoded buffer read from the connection socket. 
+In case of error it returns <tt>nil</tt> and the error code, which can be
+<tt>0</tt> for a "connection terminated" or <tt>< 0</tt> for any problem 
+that might have occurred.
+</p>
+
+
+<p><a name="renegotiate"><tt><b>s:renegotiate( )</b></tt></a></p>
+<p>SSL renegotiation is essentially an SSL handshake during a connection.
+This causes client credentials to be reevaluated and a new session to be 
+created. It doesnt check *yet* if the handshake has been succesfully done
+since it depends on timeout. 
+
+
+<p><a name="shutdown"><tt><b>s:shutdown( )</b></tt></a></p>
+<p>Shuts the SSL connection stablished by <tt>s</tt> down. The 
+shutdown handshake and negotiations are performed by both server and
+the client, and the local address to which <tt>s</tt> was bound 
+is made available to other applications. No further operations (except 
+for further calls to <tt>close</tt>) are allowed on a closed object.</p>
+<p>Note: It is important to shutdown all used objects once they are not
+needed, since, in many systems, each socket uses a file descriptor,
+which are a limited system resource. </p>
+
+
+<p><a name="write"><tt><b>s:write(</b>string<b>)</b></tt></a></p>
+<p>Writes the <tt>string</tt> encripted through the socket. The 
+function returns an error code, which is <tt>nil</tt> in case of success, 
+Or anything less than 0 if any error have occurred. </p>
+
+<br>
+
+<p><h2><a name="attributes">Attributes</a></h2></p>
+<p>The attributes of LuaSSL are exactly the same of the constants exported by 
+OpenSSL. If you are already familiar with OpenSSL, you can just adapt to Lua 
+way of summing them up.</p>
+
+<p>In OpenSSL one could make the choice of having the peer verified and to fail
+no certificate were issued by the other part with the following sentence:</p>
+<pre>
+    SSL_VERIFY_PEER | SSL_FAIL_IF_NO_PEER_CERT
+</pre>
+
+<p>As in lua these constants became numbers, this summing becomes intuitively:</p>
+<pre>
+    ssl.VERIFY_PEER + ssl.FAIL_IF_NO_PEER_CERT
+</pre>
+
+<p>There are two groups of constants which may be added together, they are listed 
+below:</p>
+<ul>
+    <li><a name="verify_options"><h3>Verify Options:</h3></a>
+    <p><b><tt>Default: ssl.VERIFY_PEER</tt></b></p>
+    <ul>
+        <li> <tt>ssl.VERIFY_NONE</tt><br><br> No request for a certificate is sent. Any
+             certificate received will be verified but will not terminate
+             the handshake in a failure.</li><br>
+        <li> <tt>ssl.VERIFY_PEER</tt><br><br> 
+             A request for a certificate will be made 
+             but this request may be ignored. If a certificate is sent back
+             it will be verified. If the verification fails, the handshake
+             is terminated immediately.</li><br>
+        <li> <tt>ssl.VERIFY_FAIL_IF_NO_PEER_CERT</tt><br><br> 
+             If <tt>SSL_VERIFY_PEER</tt>
+             is not set, this flag is ignored. Use of this flag will cause the
+             handshake to terminate immediately if no certificate is provided by
+             the peer.</li><br>
+        <li> <tt>ssl.VERIFY_CLIENT_ONCE</tt><br><br> 
+             If <tt>SSL_VERIFY_PEER</tt>
+             is not set, this flag is ignored. Use of this flag will prevent
+             the server from requesting a certificate from the client in the 
+             case of a renegotiation. A certificate will still be requested 
+             during the initial handshake.</li><br>
+     </ul>
+     <li<a name="options"><h3>General Options:</h3></a>
+     <p>These options change the behavior of the SSL context. Their main
+     goal is to fix some bugs related to previous versions so they still
+     compatible with the current one. ssl.OP_ALL turns on all the bugs
+     workarounds for compatibility issues, meaning that no bugs (from the
+     listed ones) related to older versions will affect the connection.
+     ssl.OP_NO_SSLv2 as it implies, do not allow connections with version 2
+     of the secure socket layer for it is insecure to do that since SSLv2
+     has major bugs, fixed by SSLv3 and TLS.  The default will do for almost
+     all cases.</p>
+     <p><b><tt>Default: ssl.OP_ALL + ssl.OP_NO_SSLv2</tt></b></p>
+     <ul>
+        <li><tt>ssl.OP_MICROSOFT_SESS_ID_BUG</tt>
+        <p>www.microsoft.com -
+        when talking SSLv2, if session-id reuse is performed, the
+        session-id passed back in the server-finished message is different
+        from the one decided upon.</p>
+        </li>
+        <li><tt>ssl.OP_NETSCAPE_CHALLENGE_BUG</tt>
+        <p>Netscape-Commerce/1.12, when talking SSLv2, accepts a 32 byte
+        challenge but then appears to only use 16 bytes when generating the
+        encryption keys. Using 16 bytes is ok but it should be ok to use
+        32. According to the SSLv3 spec, one should use 32 bytes for the
+        challenge when operating in SSLv2/v3 compatibility mode, but as
+        mentioned above, this breaks this server so 16 bytes is the way to
+        go.</p>
+        </li>
+        <li><tt>ssl.OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG</tt>
+        <p>ssl3.netscape.com:443, first a connection is established
+        with RC4-MD5. If it is then resumed, we end up using DES-CBC3-SHA.
+        It should be RC4-MD5 according to 7.6.1.3, 'cipher_suite'.</p>
+        
+        <p>Netscape-Enterprise/2.01 (https://merchant.netscape.com) has
+        this bug. It only really shows up when connecting via SSLv2/v3
+        then reconnecting via SSLv3. The cipher list changes....</p>
+            
+        <p>NEW INFORMATION. Try connecting with a cipher list of just
+        DES-CBC-SHA:RC4-MD5. For some weird reason, each new
+        connection uses RC4-MD5, but a re-connect tries to use
+        DES-CBC-SHA. So netscape, when doing a re-connect, always
+        takes the first cipher in the cipher list.</p>
+        </li>
+        <li><tt>ssl.OP_SSLREF2_REUSE_CERT_TYPE_BUG</tt><p></p></li>
+        <li><tt>ssl.OP_MICROSOFT_BIG_SSLV3_BUFFER</tt><p></p></li>
+        <li><tt>ssl.OP_MSIE_SSLV2_RSA_PADDING</tt><p></p></li>
+        <li><tt>ssl.OP_SSLEAY_080_CLIENT_DH_BUG</tt><p></p></li>
+        <li><tt>ssl.OP_TLS_D5_BUG</tt><p></p></li>
+        <li><tt>ssl.OP_TLS_BLOCK_PADDING_BUG</tt><p></p></li>
+        <li><tt>ssl.OP_DONT_INSERT_EMPTY_FRAGMENTS</tt>
+        <p>Disables a countermeasure against a SSL 3.0/TLS 1.0 protocol
+        vulnerability affecting CBC ciphers, which cannot be handled by
+        some broken SSL implementations. This option has no effect for
+        connections using other ciphers.</p>
+        </li>
+        <li><tt>ssl.OP_ALL</tt>
+        <p>All of the above bug workarounds.</p>
+        <p>It is usually safe to use SSL_OP_ALL to enable the bug workaround
+        options if compatibility with somewhat broken implementations is
+        desired.</p>
+        
+        <p>The following modifying options are available:</p> 
+        </li>
+        <li><tt>ssl.OP_TLS_ROLLBACK_BUG</tt>
+        <p>Disable version rollback attack detection.</p>
+        <p>During the client key exchange, the client must send the
+        same information about acceptable SSL/TLS protocol levels
+        as during the first hello. Some clients violate this rule
+        by adapting to the server's answer. (Example: the client
+        sends a SSLv2 hello and accepts up to
+        SSLv3.1=TLSv1, the server only understands up to
+        SSLv3. In this case the client must still use the
+        same SSLv3.1=TLSv1 announcement. Some clients step
+        down to SSLv3 with respect to the server's answer
+        and violate the version rollback protection.) </p>
+        </li>
+        <li><tt>ssl.OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION</tt>
+        <p>When performing renegotiation as a server, always start a new
+        session (i.e., session resumption requests are only accepted in the
+        initial handshake). This option is not needed for clients.</p>
+        </li>
+        <li><tt>ssl.OP_SINGLE_DH_USE</tt>
+        <p>Always create a new key when using temporary/ephemeral DH
+        parameters. This option must be used to prevent small subgroup 
+        attacks, when the DH parameters were not generated using 
+        ``strong'' primes (e.g. when using DSA-parameters). If ``strong'' 
+        primes were used, it is not strictly necessary to generate a new 
+        DH key during each handshake but it is also recommended. 
+        SSL_OP_SINGLE_DH_USE should therefore be enabled whenever 
+        temporary/ephemeral DH parameters are used.</p>
+        </li>
+        <li><tt>ssl.OP_EPHEMERAL_RSA</tt>
+        <p>Always use ephemeral (temporary) RSA key when doing RSA 
+        operations According to the
+        specifications this is only done, when a RSA key can only be used
+        for signature operations (namely under export ciphers with
+        restricted RSA keylength). By setting this option,
+        ephemeral RSA keys are always used. This option breaks
+        compatibility with the SSL/TLS specifications and may lead
+        to interoperability problems with clients and should
+        therefore never be used. Ciphers with EDH (ephemeral
+        Diffie-Hellman) key exchange should be used
+        instead.</p>
+        </li>
+        <li><tt>ssl.OP_CIPHER_SERVER_PREFERENCE</tt>
+        <p>When choosing a cipher, use the server's preferences instead of
+        the client preferences. When not set, the SSL server will always
+        follow the clients preferences. When set, the SSLv3/TLSv1 server
+        will choose following its own preferences. Because of the different
+        protocol, for SSLv2 the server will send his list of preferences to
+        the client and the client chooses.</p> 
+        </li>
+        <li><tt>ssl.OP_NO_SSLv2</tt>
+        <p>Do not use the SSLv2 protocol.</p>
+        </li>
+        <li><tt>ssl.OP_NO_SSLv3</tt>
+        <p>Do not use the SSLv3 protocol.</p>
+        </li>
+        <li><tt>ssl.OP_NO_TLSv1</tt>
+        <p>Do not use the TLSv1 protocol.</p>
+        </li>
+        <li><tt>ssl.OP_PKCS1_CHECK_1</tt><p></p></li>
+        <li><tt>ssl.OP_PKCS1_CHECK_2</tt><p></p></li>
+        <li><tt>ssl.OP_NETSCAPE_CA_DN_BUG</tt>
+        <p>If we accept a netscape connection, demand a client cert, have a
+        non-self-signed CA which does not have its CA in netscape, and the
+        browser has a cert, it will crash/hang. Works for 3.x and 4.xbeta </p>
+        </li>
+        <li><tt>ssl.OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG</tt><p></p></li>
+     </ul>
+</ul>
+
+<h3><a name="cipherlist">Cipher Listing</a></h3>
+<p>The list of ciphers to be used by the application may be optionally determined
+in Lua. Since the default cipher list is both careful and complete, you may
+never need to specify a cipher list yourself, but if your are working with some
+specificity, you'll have to tell the SSL context which ciphers to use.</p>
+
+<p>For instance "ALL" is a shortcut for every available combination. Additionally, we can precede a keyword with the "!" operator to remove all ciphers associated with the keyword. Using this we will create a string to define our custom cipher list. There are other operators such as "+" or "-", but they are not essential for specifying a secure list. For applications that need a custom definition, the ciphers manpage of the OpenSSL is a good reference on string formation.</p>
+
+<p>A brief description of the keywords follows here:</p>
+
+<ul>
+    <li>DEFAULT: the default cipher list is "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH".
+    </li><br> 
+
+    <li>ALL: all ciphers suites except the eNULL ciphers which must be explicitly 
+        enabled.</li><br>
+
+    <li>HIGH: "high" encryption cipher suites. This currently means those with
+key lengths larger than 128 bits. </li><br>
+
+    <li>MEDIUM: "medium" encryption cipher suites, currently those using 128 bit
+    encryption.</li><br>
+
+    <li>LOW: "low" encryption cipher suites, currently those using 64 or 56 bit
+    encryption algorithms but excluding export cipher suites.</li><br>
+    
+    <li>EXP, EXPORT: export encryption algorithms. Including 40 and 56 bits algorithms.</li><br>
+
+    <li>EXPORT40: 40 bit export encryption algorithms</li><br>
+
+    <li>EXPORT56: 56 bit export encryption algorithms.</li><br>
+
+    <li>eNULL, NULL: the "NULL" ciphers that is those offering no encryption. 
+    Because these offer no encryption at all and are a security risk they are
+    disabled unless explicitly included.</li><br>
+
+    <li>aNULL: the cipher suites offering no authentication. This is currently the
+    anonymous DH algorithms. These cipher suites are vulnerable to a
+    "man in the middle" attack and so their use is normally discouraged.</li><br>
+
+    <li>kRSA, RSA: cipher suites using RSA key exchange.</li><br>
+
+    <li>kEDH: cipher suites using ephemeral DH key agreement.</li><br>
+
+    <li>kDHr, kDHd: cipher suites using DH key agreement and DH certificates 
+    signed by CAs with RSA and DSS keys respectively. Not implemented.</li><br>
+
+    <li>aRSA: cipher suites using RSA authentication, i.e. the certificates carry
+    RSA keys.</li><br>
+
+    <li>aDSS, DSS: cipher suites using DSS authentication, i.e. the certificates carry
+    DSS keys.</li><br>
+
+    <li>TLSv1, SSLv3, SSLv2: TLS v1.0, SSL v3.0 or SSL v2.0 cipher suites 
+    respectively.</li><br>
+
+    <li>DH: cipher suites using DH, including anonymous DH.</li><br>
+
+    <li>ADH: anonymous DH cipher suites.</li><br>
+
+    <li>AES: cipher suites using AES.</li><br>
+
+    <li>3DES: cipher suites using triple DES.</li><br>
+
+    <li>DES: cipher suites using DES (not triple DES).</li><br>
+
+    <li>RC4: cipher suites using RC4.</li><br>
+
+    <li>RC2: cipher suites using RC2.</li><br>
+
+    <li>IDEA: cipher suites using IDEA.</li><br>
+
+    <li>MD5: cipher suites using MD5.</li><br>
+
+    <li>SHA1, SHA: cipher suites using SHA1.</li><br>
+</ul>
+
+<br>
+<p><h3><a name="ephemeral">Ephemeral Keying</a></h3></p>
+As usually in SSL connections we shall use the RSA algorithm as it has the 
+capabilities of doing most signing and encrypting. SSL can use it to perform
+the key agreement necessary to create the shared key under which the data in 
+the stream is encrypted. This technique, such as when the key exchange is 
+conducted through a persistent key is called <i>static keying</i>. Building 
+on this definition, <i>ephemeral keying</i> is defined as key exchange through
+a temporary key. At first, it may seem that temporary keys may not allow for 
+proper authentication -- not true. Generaly, with ephemeral keying, the 
+authentication is accomplished through signature verification with persistent 
+keys, and the temporary keys are used only for key agreement. There are two main
+advantages of ephemeral keying over static keying from a security perspective.</p>
+
+<p>Consider the case the certificates are based upon DSA keys. The DSA algorithm
+provides a mechanism for signing but not for encrypting. Thus, having only DSA
+keys on either side of an SSL connection leaves the protocol unable to perform key
+exchange. It follows that static keying is not even an option for DSA-based
+certificates; we must supplement them with ephemeral keys.</p>
+
+<p>The second advantage is that they provide <i>forward secrecy</i>. At a high
+level , forward secrecy means that if the private key is obtained by a third 
+party, that third party will not be able to decode previous sessions conducted 
+with that key or even future sessions conducted by someone else with the 
+compromised key.</p>
+
+<p>These two points make the benefits of using ephemeral keying clear. In terms of
+SSL, using ephemeral keys essentially mandates that the keys embedded in the
+certificates shall be used only for signatures and not for encryption. There are two
+methods for key exchange in OpenSSL: temporary RSA keys or Diffie-Hellman (DH) key
+agreement. Of these two choices, DH is better because temporary RSA keys violate the
+SSL/TLS protocols. The RSA keying was originally implemented to make sure export
+restrictions on cryptography were not violated. Today this issue is not a primary
+concert; thus, ephemeral RSA keys tend not to be used. Additionally, generation of
+these temporary RSA keys is much slower than using DH, presuming the DH parameters
+are pre-generated.</p>
+
+<hr>
+<p align="center"><a href="index.html">home</a> &middot;
+<a href="index.html#down">download</a> &middot; <a href="intro.html">quickstart</a> &middot;
+<a href="references.html">references</a> &middot; <a href="idx.html">index</a>
+</p>
+</body>
+</html>
